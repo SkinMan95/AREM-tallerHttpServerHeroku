@@ -10,10 +10,10 @@ import java.io.*;
 public class HttpServer {
 
     public static final int DEFAULT_PORT = 36000;
-    
+
     public static void main(String[] args) throws IOException {
         int port = new Integer(System.getenv("PORT"));
-        
+
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);
@@ -41,8 +41,10 @@ public class HttpServer {
                 break;
             }
         }
-        outputLine
-                = "<!DOCTYPE html>"
+        outputLine = "HTTP/1.1 200 OK\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + "<!DOCTYPE html>"
                 + "<html>"
                 + "<head>"
                 + "<meta charset=\"UTF-8\">"
