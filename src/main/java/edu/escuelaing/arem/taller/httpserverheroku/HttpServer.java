@@ -29,22 +29,7 @@ public class HttpServer {
         while (!finished) {
             clientSocket = serverSocket.accept();
 
-            OutputStream out = clientSocket.getOutputStream();
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-            String inputLine, outputLine;
-
-            while ((inputLine = in.readLine()) != null) {
-                processPetition(inputLine, out);
-                System.out.println("Received: " + inputLine);
-                if (!in.ready()) {
-                    break;
-                }
-            }
-
-            out.close();
-            in.close();
-            clientSocket.close();
+            (new ResponderThread(clientSocket)).start();
         }
 
         serverSocket.close();
@@ -207,8 +192,4 @@ public class HttpServer {
         }
     }
 
-    private interface Responder {
-
-        public void respond(OutputStream out);
-    }
 }
