@@ -13,9 +13,16 @@ import java.util.StringTokenizer;
 public class HttpServer {
 
     public static final int DEFAULT_PORT = 36000;
+    public static boolean finished = false;
+    public static int port = DEFAULT_PORT;
 
     public static void main(String[] args) throws Exception {
-        int port = new Integer(System.getenv("PORT"));
+        try {
+            port = new Integer(System.getenv("PORT"));
+        } catch(Exception ex) {
+            System.err.println("ERROR: " + ex + " using default address (" + DEFAULT_PORT + ")");
+            port = DEFAULT_PORT;
+        }
 
         generateResponders();
 
@@ -25,7 +32,6 @@ public class HttpServer {
         System.out.println("Ready to receive...");
 
         Socket clientSocket = null;
-        boolean finished = false;
         while (!finished) {
             clientSocket = serverSocket.accept();
 
