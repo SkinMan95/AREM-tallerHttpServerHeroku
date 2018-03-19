@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  */
 public class HttpServer {
 
-    public static final int DEFAULT_PORT = 36000;
+    public static final int DEFAULT_PORT = 5000;
     public static boolean finished = false;
     public static int port = DEFAULT_PORT;
 
@@ -29,7 +29,7 @@ public class HttpServer {
         ServerSocket serverSocket = null;
         serverSocket = new ServerSocket(port);
 
-        System.out.println("Ready to receive...");
+        System.out.println("Ready to receive through " + port +  "...");
 
         Socket clientSocket = null;
         while (!finished) {
@@ -47,10 +47,10 @@ public class HttpServer {
         respondersMap = new HashMap<>();
         respondersMap.put("/", (OutputStream out) -> {
             PrintWriter o = new PrintWriter(out, true);
-            o.println("HTTP/1.1 200 OK\n"
-                    + "Content-Type: text/html; charset=utf-8\n"
-                    + "Content-Encoding: raw\n"
-                    + "\n"
+            o.println("HTTP/1.1 200 OK\r\n"
+                    + "Content-Type: text/html; charset=utf-8\r\n"
+                    + "Content-Encoding: raw\r\n"
+                    + "\r\n"
                     + "<!DOCTYPE html>\n"
                     + "<html>\n"
                     + "  <head>\n"
@@ -124,10 +124,10 @@ public class HttpServer {
 
         respondersMap.put("/css/styles.css", (OutputStream out) -> {
             PrintWriter o = new PrintWriter(out, true);
-            o.println("HTTP/1.1 200 OK\n"
-                    + "Content-Type: text/css; charset=utf-8\n"
-                    + "Content-Encoding: raw\n"
-                    + "\n"
+            o.println("HTTP/1.1 200 OK\r\n"
+                    + "Content-Type: text/css; charset=utf-8\r\n"
+                    + "Content-Encoding: raw\r\n"
+                    + "\r\n"
                     + "body {\n"
                     + "    background-color: #990000;\n"
                     + "    font-family: arial, helvetica, sans-serif;\n"
